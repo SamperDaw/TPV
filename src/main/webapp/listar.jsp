@@ -16,23 +16,37 @@
     </head>
     <body>
         <div class="container"">
-        <h1>Listado de productos wew</h1>
-        <%
-            List<Productos> listaProductos = (List<Productos>) request.getAttribute("listado");
-            String mensaje= (String) request.getAttribute("mensaje");
-        %>
-        <h2><%=mensaje%></h2>
-        <table class="table table-bordered table-dark">
-            <% for (Productos p : listaProductos) {%>
-            <tr>
-                <td><%= p.getId()%></td>
-                <td> <%= p.getNombre()%> </td>
-                <td> <%=p.getCategoria()%>  </td>
-                <td> <%= p.getPrecio()%></td>
-                <td><a href="Servlet?op=borrar&id=<%=p.getId()%>">Borrar</a></td>
-            </tr>          
-            <% }%>
-        </table>
-        </div>
+            <h1>Listado de productos wew</h1>
+            <%
+                List<Productos> listaProductos = (List<Productos>) request.getAttribute("listado");
+                String mensaje = (String) request.getAttribute("mensaje");
+
+            %>
+            <h2 class="alert alert-success"><%=mensaje%></h2>
+            <table class="table table-bordered table-dark">
+                <% for (Productos p : listaProductos) {%>
+                <tr>
+                    <td><%= p.getId()%></td>
+                    <td> <%= p.getNombre()%> </td>
+                    <td> <%=p.getCategoria()%>  </td>
+                    <td> <%= p.getPrecio()%></td>
+                    <td><a href="Servlet?op=borrar&id=<%=p.getId()%>" onclick="return Confirmation()">Borrar</a></td>
+                    <td><a href="Servlet?op=actualizar&id=<%=p.getId()%>">Actualizar</a></td>
+                </tr>          
+                <% }%>
+            </table>
+        
+        <script>
+            function Confirmation() {
+                if (confirm("Esta seguro/a de que \n\
+                        quiere eliminar el producto?")) {
+                    alert("El registro se eliminará");
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+        </script>
+
     </body>
 </html>
